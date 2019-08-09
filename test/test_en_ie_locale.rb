@@ -4,11 +4,16 @@ require_relative 'test_helper'
 
 class TestEnIeLocale < Test::Unit::TestCase
   def setup
+    @previous_locale = Faker::Config.locale
     Faker::Config.locale = 'en-IE'
   end
 
   def teardown
-    Faker::Config.locale = nil
+    Faker::Config.locale = @previous_locale
+  end
+
+  def test_en_ie_internet_methods
+    assert Faker::Internet.domain_suffix.is_a? String
   end
 
   def test_en_ie_address_methods
@@ -16,13 +21,11 @@ class TestEnIeLocale < Test::Unit::TestCase
     assert Faker::Address.city.is_a? String
     assert Faker::Address.state.is_a? String
     assert Faker::Address.postcode.is_a? String
-
-    assert_equal Faker::Address.country, 'Ireland'
-    assert_equal Faker::Address.country_code, 'IE'
   end
 
-  def test_en_ie_country
-    assert_equal 'Ireland', Faker::Address.country
+  def test_en_ie_country_methods
+    assert_equal Faker::Address.country, 'Ireland'
+    assert_equal Faker::Address.country_code, 'IE'
   end
 
   def test_mobiles_start_with_0
