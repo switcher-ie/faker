@@ -169,6 +169,12 @@ en-IE:
       country: ['Ireland']
     internet:
       domain_suffix: [ie]
+    mobile_number:
+      formats: [
+        '083 ### ####',
+        '086 ### ####',
+        '087 ### ####'
+      ]
     phone_number:
       formats: [
         '01 ### ####',
